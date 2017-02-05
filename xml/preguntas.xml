@@ -1,62 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE questions SYSTEM "preguntas_esquema.dtd">
+
 <questions>
-	<question id="mlag001">
-		<type></type>
-		<title>Primera pregunta...</title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag002">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag003">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag004">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag005">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag006">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag007">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag008">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag009">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
-	<question id="mlag010">
-		<type></type>
-		<title></title>
-		<option value=""></option>
-		<answer></answer>
-	</question>
+    <question id="mlag_001">
+		<type>select</type>
+		<title>¿De qué animal proviene el nombre de las Islas Canarias?</title>
+		<option>Canario</option>
+		<option>Periquito</option>
+		<option>Perro</option>
+		<option>Gato</option>
+		<answer>2</answer>
+    </question>
+    <question id="mlag_002">
+		<type>select</type>
+		<title>¿De qué país son originarios los sombreros de Panamá?</title>
+		<option>Ecuador</option>
+		<option>Panamá</option>
+		<option>España</option>
+		<answer>0</answer>
+    </question>
+    <question id="mlag_003">
+		<type>text</type>
+		<title>¿Cuántos años duró la guerra de 100 años?</title>
+		<answer>116</answer>
+	    </question>
+	    <question id="mlag_004">
+		<type>text</type>
+		<title>¿Cuántos países conforman el Reino Unido?</title>
+		<answer>4</answer>
+    </question>
+     <question id="mlag_005">
+		<type>checkbox</type>
+		<title>¿De qué animal/es se obtiene la tripa de gato? (para hacer cuerdas de violines)</title>
+		<option>oveja</option>
+		<option>gato</option>
+		<option>carnero</option>
+		<option>iguana</option>
+	    <option>perro</option>
+		<answer>0</answer>
+		<answer>2</answer>
+    </question>
+    <question id="mlag_006">
+		<type>checkbox</type>
+		<title>¿Cuál es la montaña más alta del mundo?</title>
+		<option>Everest</option>
+		<option>Mauna Kea</option>
+		<option>Chimborazo</option>
+		<option>Puig Major</option>
+		<answer>0</answer>
+		<answer>1</answer>     
+		<answer>2</answer>
+    </question>
+    <question id="mlag_007">
+		<type>radio</type>
+		<title>¿Cómo se llamaba el rey Jorge VI de Inglaterra?</title>
+		<option>George</option>
+		<option>Albert</option>
+		<option>John</option>
+		<option>Tom</option>
+		<answer>1</answer>
+    </question>
+    <question id="mlag_008">
+		<type>radio</type>
+		<title>¿Cuántas parejas de animales metió Noé en su arca?</title>
+		<option>1</option>
+		<option>2</option>
+		<option>5</option>
+		<option>Otro</option>
+		<answer>3</answer>
+    </question>
+ 	<question id="mlag_009">
+		<type>select multiple</type>
+		<title>¿Dónde está Macadamia?</title>
+		<option>África</option>
+		<option>Asia</option>
+		<option>Europa</option>
+		<option>Ninguna de las anteriores es correcta.</option>
+		<answer>3</answer>
+    </question>
+	<question id="mlag_010">
+		<type>select multiple</type>
+		<title>Divide 30 por 0.5 y súmale 10. ¿Cuál es el resultado? a) 70 b) 25 c) 405/10 d) 140/2</title>
+		<option>70</option>
+		<option>25</option>
+		<option>405/10</option>
+		<option>140/2</option>
+		<answer>0</answer>
+		<answer>3</answer>
+	</question>	
 </questions>
