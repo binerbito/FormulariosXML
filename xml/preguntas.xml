@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--
 <!DOCTYPE questions SYSTEM "preguntas_esquema.dtd">
+-->
 
-<questions>
+<questions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preguntas.xsd">
     <question id="mlag_001">
 		<type>select</type>
 		<title>¿De qué animal proviene el nombre de las Islas Canarias?</title>
@@ -29,6 +30,7 @@
 		<type>text</type>
 		<title>¿Cuántos países conforman el Reino Unido?</title>
 		<answer>4</answer>
+		<answer>cuatro</answer>
     </question>
      <question id="mlag_005">
 		<type>checkbox</type>
