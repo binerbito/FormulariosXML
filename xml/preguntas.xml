@@ -2,9 +2,8 @@
 <!--
 <!DOCTYPE questions SYSTEM "preguntas_esquema.dtd">
 -->
-
 <questions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preguntas.xsd">
-    <question id="mlag_001">
+	<question id="mlag_001">
 		<type>select</type>
 		<title>¿De qué animal proviene el nombre de las Islas Canarias?</title>
 		<option>Canario</option>
@@ -12,38 +11,37 @@
 		<option>Perro</option>
 		<option>Gato</option>
 		<answer>2</answer>
-    </question>
-    <question id="mlag_002">
+	</question>
+	<question id="mlag_002">
 		<type>select</type>
 		<title>¿De qué país son originarios los sombreros de Panamá?</title>
 		<option>Ecuador</option>
 		<option>Panamá</option>
 		<option>España</option>
 		<answer>0</answer>
-    </question>
-    <question id="mlag_003">
+	</question>
+	<question id="mlag_003">
 		<type>text</type>
 		<title>¿Cuántos años duró la guerra de 100 años?</title>
 		<answer>116</answer>
-	    </question>
-	    <question id="mlag_004">
+	</question>
+	<question id="mlag_004">
 		<type>text</type>
 		<title>¿Cuántos países conforman el Reino Unido?</title>
 		<answer>4</answer>
-		<answer>cuatro</answer>
-    </question>
-     <question id="mlag_005">
+	</question>
+	<question id="mlag_005">
 		<type>checkbox</type>
 		<title>¿De qué animal/es se obtiene la tripa de gato? (para hacer cuerdas de violines)</title>
 		<option>oveja</option>
 		<option>gato</option>
 		<option>carnero</option>
 		<option>iguana</option>
-	    <option>perro</option>
+		<option>perro</option>
 		<answer>0</answer>
 		<answer>2</answer>
-    </question>
-    <question id="mlag_006">
+	</question>
+	<question id="mlag_006">
 		<type>checkbox</type>
 		<title>¿Cuál es la montaña más alta del mundo?</title>
 		<option>Everest</option>
@@ -53,8 +51,8 @@
 		<answer>0</answer>
 		<answer>1</answer>     
 		<answer>2</answer>
-    </question>
-    <question id="mlag_007">
+	</question>
+	<question id="mlag_007">
 		<type>radio</type>
 		<title>¿Cómo se llamaba el rey Jorge VI de Inglaterra?</title>
 		<option>George</option>
@@ -62,8 +60,8 @@
 		<option>John</option>
 		<option>Tom</option>
 		<answer>1</answer>
-    </question>
-    <question id="mlag_008">
+	</question>
+	<question id="mlag_008">
 		<type>radio</type>
 		<title>¿Cuántas parejas de animales metió Noé en su arca?</title>
 		<option>1</option>
@@ -71,8 +69,8 @@
 		<option>5</option>
 		<option>Otro</option>
 		<answer>3</answer>
-    </question>
- 	<question id="mlag_009">
+	</question>
+	<question id="mlag_009">
 		<type>select multiple</type>
 		<title>¿Dónde está Macadamia?</title>
 		<option>África</option>
@@ -80,7 +78,7 @@
 		<option>Europa</option>
 		<option>Ninguna de las anteriores es correcta.</option>
 		<answer>3</answer>
-    </question>
+	</question>
 	<question id="mlag_010">
 		<type>select multiple</type>
 		<title>Divide 30 por 0.5 y súmale 10. ¿Cuál es el resultado? a) 70 b) 25 c) 405/10 d) 140/2</title>
