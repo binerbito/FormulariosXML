@@ -25,20 +25,24 @@ function gestionarXml(dadesXml){
 		tipo = xmlDoc.getElementsByTagName("type")[i].innerHTML;
 		switch(tipo) {
 			case "select": 
-				imprimirPregunta(i, xmlDoc);
+				imprimirTituloPregunta(i, xmlDoc);
 				imprimirOpcionesSelect(i, xmlDoc);
 				break;
 			case "text":
-				imprimirPregunta(i, xmlDoc);
+				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCajaText(numeroCajaTexto, xmlDoc);
 				numeroCajaTexto++;
 				break;
 		}
 	}
+	imprimirEspacio();
+	imprimirEspacio();
+	imprimirBotonCorregir();
 }
 
 
-function imprimirPregunta(i, xmlDoc){
+//se le pasa una pregunta del xml y busca su atributo title y lo plasma en un <h3> en el html
+function imprimirTituloPregunta(i, xmlDoc){
 	var tituloPregunta = document.createElement("h3");
 	tituloPregunta.innerHTML=xmlDoc.getElementsByTagName("title")[i].innerHTML;
 	formContainer.appendChild(tituloPregunta);
@@ -60,7 +64,19 @@ function imprimirOpcionesSelect(i, xmlDoc) {
 
 function imprimirCajaText(numeroCajaTexto, xmlDoc) {
 	var cajaTexto = document.createElement("input");
-	cajaTexto.type="number";
-	cajaTexto.id= "cajaTexto" + numeroCajaTexto;
+	cajaTexto.type = "number";
+	cajaTexto.id = "cajaTexto" + numeroCajaTexto;
 	formContainer.appendChild(cajaTexto);
+}
+
+function imprimirBotonCorregir() {
+	var botonCorregir = document.createElement("input");
+	botonCorregir.type = "submit";
+	botonCorregir.value = "Corregir";
+	formContainer.appendChild(botonCorregir);
+}
+
+function imprimirEspacio() {
+	var espacio = document.createElement("br");
+	formContainer.appendChild(espacio);
 }
