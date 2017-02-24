@@ -35,8 +35,7 @@ function gestionarXml(dadesXml){
 				break;
 		}
 	}
-	imprimirEspacio();
-	imprimirEspacio();
+	imprimirEspacios(3);
 	imprimirBotonCorregir();
 }
 
@@ -76,7 +75,9 @@ function imprimirBotonCorregir() {
 	formContainer.appendChild(botonCorregir);
 }
 
-function imprimirEspacio() {
-	var espacio = document.createElement("br");
-	formContainer.appendChild(espacio);
+function imprimirEspacios(numeroEspacios) {
+	for (i=0; i<numeroEspacios; i++) {
+		var espacio = document.createElement("br");
+		formContainer.appendChild(espacio);
+	}
 }
