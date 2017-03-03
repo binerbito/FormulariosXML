@@ -45,13 +45,15 @@ function gestionarXml(dadesXml){
 	for (i = 0; i<10; i++) {
 		tipo = xmlDoc.getElementsByTagName("type")[i].innerHTML;
 		switch(tipo) {
-			case "select": 
+			case "select":
+				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirOpcionesSelect(i, xmlDoc);
 				preguntasSelect.push(i);
 				respuestasSelect.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[0].innerHTML));
 				break;
 			case "text":
+				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCajaText(numeroCajaTexto, xmlDoc);
 				numeroCajaTexto++;
@@ -59,16 +61,19 @@ function gestionarXml(dadesXml){
 				respuestasText.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[0].innerHTML));
 				break;
 			case "checkbox":
+				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCheckBox(i, xmlDoc);
 				preguntasCheckBox.push(i);
 				agregarRespuestasCheckbox(i, xmlDoc);
 				break;
 			case "radio":
+				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirRadioButton(i, xmlDoc);
 				break;
 			case "select multiple":
+				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirSelectMultiple(i, xmlDoc);
 				break;
@@ -83,7 +88,7 @@ function gestionarXml(dadesXml){
 function imprimirTituloPregunta(i, xmlDoc){
 	var tituloPregunta = document.createElement("h3");
 	tituloPregunta.innerHTML=xmlDoc.getElementsByTagName("title")[i].innerHTML;
-	formContainer.appendChild(tituloPregunta);
+	document.getElementById('pregunta'+i).appendChild(tituloPregunta);
 }
 
 function imprimirOpcionesSelect(i, xmlDoc) {
@@ -91,7 +96,7 @@ function imprimirOpcionesSelect(i, xmlDoc) {
 	var opt = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option');
 	var select = document.createElement("select");
 	select.id = "select"+i;
-	formContainer.appendChild(select);
+	document.getElementById('pregunta'+i).appendChild(select);
 	for (j = 0; j < numOpciones; j++) { 
 		var option = document.createElement("option");
 		option.text = opt[j].innerHTML;
@@ -104,7 +109,7 @@ function imprimirCajaText(numeroCajaTexto, xmlDoc) {
 	var cajaTexto = document.createElement("input");
 	cajaTexto.type = "number";
 	cajaTexto.id = "cajaTexto" + numeroCajaTexto;
-	formContainer.appendChild(cajaTexto);
+	document.getElementById('pregunta'+i).appendChild(cajaTexto);
 }
 
 
@@ -118,9 +123,9 @@ function imprimirCheckBox(i, xmlDoc) {
 		input.type="checkbox";
 		input.name="preg"+i;
 		input.id="preg"+i+"ans"+j;
-		formContainer.appendChild(input);
-		formContainer.appendChild(label);
-		formContainer.appendChild(document.createElement("br"));
+		document.getElementById('pregunta'+i).appendChild(input);
+		document.getElementById('pregunta'+i).appendChild(label);
+		document.getElementById('pregunta'+i).appendChild(document.createElement("br"));
 	}
 }
 
@@ -135,9 +140,9 @@ function imprimirRadioButton(i, xmlDoc) {
 		input.type="radio";
 		input.name="preg"+i;
 		input.id="preg"+i+"ans"+j;
-		formContainer.appendChild(input);
-		formContainer.appendChild(span);
-		formContainer.appendChild(document.createElement("br"));
+		document.getElementById('pregunta'+i).appendChild(input);
+		document.getElementById('pregunta'+i).appendChild(span);
+		document.getElementById('pregunta'+i).appendChild(document.createElement("br"));
 	}	
 }
 
@@ -152,7 +157,7 @@ function imprimirSelectMultiple(i, xmlDoc) {
 		option.innerHTML = answerTitle;
 		selectMultiple.appendChild(option);
 		}
-	formContainer.appendChild(selectMultiple);
+	document.getElementById('pregunta'+i).appendChild(selectMultiple);
 }
 
 function imprimirEspacios(numeroEspacios) {
@@ -199,8 +204,8 @@ function corregirText() {
 
 function corregirCheckBox(){
 	for (i = 0; i<preguntasCheckBox.length; i++) {
-		var input = formContainer.getElementsByTagName('input')[].getAttribute('name')=="preg"+preguntasCheckBox[i];
-		alert(input);
+		//var input = formContainer.getElementsByTagName('input')[].getAttribute('name')=="preg"+preguntasCheckBox[i];
+		//alert(input);
 	}
 }
 
@@ -213,6 +218,12 @@ function agregarRespuestasCheckbox(i, xmlDoc) {
 }
 
 //UTILIDADES
+
+function crearDivPregunta(i) {
+	var div = document.createElement('div');
+	div.id = "pregunta"+i;
+	formContainer.appendChild(div);
+}
 
 function inicializar(){
 	document.getElementById('resultadosDiv').innerHTML = "";
