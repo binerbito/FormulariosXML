@@ -20,6 +20,10 @@ input,select{
 	width:50%
 }
 
+input[type=radio]{
+	width: 5%;zoom:1.5;
+}
+
 input[type=checkbox]{
 	width:5%;zoom:1.5
 }
