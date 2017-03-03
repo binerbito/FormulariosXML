@@ -1,16 +1,27 @@
 var formContainer = null;
 var nota = 0.0;
+
 var preguntasSelect = [];
+var respuestasSelect = [];
+
+var preguntasText = [];
+var respuestasText = [];
+
+var preguntasCheckBox = [];
+var respuestasCheckBox = [];
+
+
 window.onload = function(){ 
 	//CORREGIR al apretar el botón
 	formContainer=document.getElementById('myform');
 	formContainer.onsubmit=function(){
-
-	inicializar();
- 	presentarNota();
- 	return false;
-
- }
+		inicializar();
+		corregirSelect();
+		corregirText();
+		corregirCheckBox();
+		presentarNota();
+	 	return false;
+	}
 
 	//LEER XML de xml/preguntas.xml
 	var xhttp = new XMLHttpRequest();
@@ -37,15 +48,21 @@ function gestionarXml(dadesXml){
 			case "select": 
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirOpcionesSelect(i, xmlDoc);
+				preguntasSelect.push(i);
+				respuestasSelect.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[0].innerHTML));
 				break;
 			case "text":
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCajaText(numeroCajaTexto, xmlDoc);
 				numeroCajaTexto++;
+				preguntasText.push(i);
+				respuestasText.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[0].innerHTML));
 				break;
 			case "checkbox":
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCheckBox(i, xmlDoc);
+				preguntasCheckBox.push(i);
+				agregarRespuestasCheckbox(i, xmlDoc);
 				break;
 			case "radio":
 				imprimirTituloPregunta(i, xmlDoc);
@@ -152,7 +169,50 @@ function imprimirBotonCorregir() {
 	formContainer.appendChild(botonCorregir);
 }
 
-//Correciones ************************************************************************
+//CORREGIR
+function corregirSelect() {
+  //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
+  //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
+  //luego comparar ese value con el value guardado en answer
+  for (i = 0; i<preguntasSelect.length; i++) {
+  	var sel = formContainer.elements[preguntasSelect[i]];  
+  	var respuesta = respuestasSelect[i];
+  	if (sel.selectedIndex==respuesta) { 
+  		darRespuestaHtml("P" +preguntasSelect[i]+": Correcto");
+  		nota +=1;
+  	}
+  	else darRespuestaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
+  }
+}
+
+function corregirText() {
+	for (i = 0; i<preguntasText.length; i++) {
+		var sel = formContainer.elements[preguntasText[i]];
+		var respuesta = respuestasText[i];
+		if (sel.value == respuesta){
+			darRespuestaHtml("P" +preguntasText[i]+": Correcto");
+			nota += 1;
+		} 
+		else darRespuestaHtml("P" +preguntasText[i] + ": Incorrecto");
+	}
+}
+
+function corregirCheckBox(){
+	for (i = 0; i<preguntasCheckBox.length; i++) {
+		var input = formContainer.getElementsByTagName('input')[].getAttribute('name')=="preg"+preguntasCheckBox[i];
+		alert(input);
+	}
+}
+
+function agregarRespuestasCheckbox(i, xmlDoc) {
+	var respuestasPregunta = [];
+	for (j= 0; j <xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer").length; j++) {
+		respuestasPregunta.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[j].innerHTML));
+	}
+	respuestasCheckBox.push(respuestasPregunta);
+}
+
+//UTILIDADES
 
 function inicializar(){
 	document.getElementById('resultadosDiv').innerHTML = "";
@@ -167,9 +227,10 @@ function darRespuestaHtml(r){
 }
 
 function presentarNota(){
-	darRespuestaHtml("Nota: "+nota+" puntos sobre 3");
+	darRespuestaHtml("Nota: "+nota+" puntos sobre 10");
 }
 
+	//funcion para hacer que el select multiple se pueda aplicar sin la tecla Ctrl
 window.onmousedown = function (e) {
     var el = e.target;
     if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
@@ -186,3 +247,27 @@ window.onmousedown = function (e) {
 }
 
 //Comprobar que se han introducido datos en el formulario
+/*
+function comprobar(){
+	var f=formContainer;
+	var checked=false;
+    for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
+    	if (f.color[i].checked) checked=true;
+	}
+	if (f.elements[0].value=="") {
+		f.elements[0].focus();
+		alert("Escribe un número");
+		return false;
+	} else if (f.elements[1].selectedIndex==0) {
+		f.elements[1].focus();
+		alert("Selecciona una opción");
+		return false;
+	} if (!checked) {    
+		document.getElementsByTagName("h3")[2].focus();
+		alert("Selecciona una opción del checkbox");
+		return false;
+	} else  return true;
+}
+*/
+
+//futuras ideas: clasificar las preguntas por divs
