@@ -11,6 +11,7 @@
 		<option>Perro</option>
 		<option>Gato</option>
 		<answer>2</answer>
+		<explanation>El nombre proviene del latin "Insularia Canaria", que significa tierra de los perros.</explanation>
 	</question>
 	<question id="mlag_002">
 		<type>select</type>
@@ -19,6 +20,7 @@
 		<option>Panamá</option>
 		<option>España</option>
 		<answer>0</answer>
+		<explanation>A pesar del nombre, viene del hecho de que alcanzaron relevancia durante la construcción del Canal de Panamá cuando millares de sombreros fueron importados desde Ecuador para el uso de los trabajadores de la construcción</explanation>
 	</question>
 	<question id="mlag_003">
 		<type>text</type>

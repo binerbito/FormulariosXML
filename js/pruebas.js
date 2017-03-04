@@ -6,18 +6,36 @@ var nota = 0.0;
 
 var preguntasSelect = [];
 var respuestasSelect = [];
+var valorRespuestaSelect = [];
 
 var preguntasText = [];
 var respuestasText = [];
 
 var preguntasCheckBox = [];
 var respuestasCheckBox = [];
+var valorRespuestasCheckBox =[];
 
 var preguntasRadio = [];
 var respuestasRadio = [];
 
 var preguntasSelectMultiple = [];
 var respuestasSelectMultiple = [];
+
+/* ---------------------------- REFACTORIZACION DICCIONARIO FUTURA ----------------------------
+	
+	var dict = {
+		"select0" : {
+			"indice" : 0;
+			"respuestas" : "perro";
+			"explicacion" : "<explanation>";
+		}
+		"checkbox0" :{
+			"indice" : 4;
+			"respuestas" : [0,2];
+			"explicacion" : "<explanation>";
+		}
+	}
+*/ 
 
 
 //**********************************************************************************************
@@ -67,6 +85,7 @@ function gestionarXml(dadesXml){
 				imprimirOpcionesSelect(i, xmlDoc);
 				preguntasSelect.push(i);
 				respuestasSelect.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[0].innerHTML));
+				valorRespuestaSelect.push(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("option")[respuestasSelect[i]].innerHTML);
 				break;
 			case "text":
 				crearDivPregunta(i);
@@ -81,7 +100,7 @@ function gestionarXml(dadesXml){
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCheckBox(i, xmlDoc);
 				preguntasCheckBox.push(i);
-				agregarRespuestas(i, xmlDoc, respuestasCheckBox);
+				agregarRespuestas(i, xmlDoc, respuestasCheckBox, valorRespuestasCheckBox);
 				break;
 			case "radio":
 				crearDivPregunta(i);
@@ -204,13 +223,16 @@ function corregirSelect() {
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
   //luego comparar ese value con el value guardado en answer
   for (i = 0; i<preguntasSelect.length; i++) {
-  	var sel = document.getElementById("pregunta"+preguntasSelect[i]).getElementsByTagName("select")[0];  
+  	var sel = document.getElementById("pregunta"+preguntasSelect[i]).getElementsByTagName("select")[0];
   	var respuesta = respuestasSelect[i];
   	if (sel.selectedIndex==respuesta) { 
   		darRespuestaHtml("P" +preguntasSelect[i]+": Correcto");
   		nota +=1;
   	}
-  	else darRespuestaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
+  	else {
+  		darRespuestaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
+  		darRespuestaHtml("La respuesta correcta es: "+valorRespuestaSelect[i]);
+  	}
   }
 }
 
@@ -222,7 +244,10 @@ function corregirText() {
 			darRespuestaHtml("P" +preguntasText[i]+": Correcto");
 			nota += 1;
 		} 
-		else darRespuestaHtml("P" +preguntasText[i] + ": Incorrecto");
+		else {
+			darRespuestaHtml("P" +preguntasText[i] + ": Incorrecto");
+			darRespuestaHtml("La respuesta correcta es: "+respuestasText[i]);
+		}
 	}
 }
 
@@ -304,12 +329,16 @@ function corregirSelectMultiple() {
 	}
 }
 
-function agregarRespuestas(i, xmlDoc, arrayRespuestas) {
+function agregarRespuestas(i, xmlDoc, arrayRespuestas, arrayValorRespuestas) {
 	var respuestasPregunta = [];
+	var valorRespuesta = [];
 	for (j= 0; j <xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer").length; j++) {
 		respuestasPregunta.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[j].innerHTML));
+		// REVISAR: valorRespuesta.push("hola");
 	}
 	arrayRespuestas.push(respuestasPregunta);
+	//revisar ERROR
+	//arrayValorRespuestas.push(valorRespuesta);
 }
 
 //**********************************************************************************************
@@ -364,3 +393,10 @@ function comprobar(){
 	}
 	return true;
 }
+
+/*
+// POSIBLES REFACTORIZACIONES FUTURAS
+//
+// Convertir todos los arrays en un diccionario
+//
+*/
