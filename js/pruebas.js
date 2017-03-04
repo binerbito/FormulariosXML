@@ -196,7 +196,7 @@ function corregirSelect() {
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
   //luego comparar ese value con el value guardado en answer
   for (i = 0; i<preguntasSelect.length; i++) {
-  	var sel = formContainer.elements[preguntasSelect[i]];  
+  	var sel = document.getElementById("pregunta"+preguntasSelect[i]).getElementsByTagName("select")[0];  
   	var respuesta = respuestasSelect[i];
   	if (sel.selectedIndex==respuesta) { 
   		darRespuestaHtml("P" +preguntasSelect[i]+": Correcto");
@@ -208,9 +208,9 @@ function corregirSelect() {
 
 function corregirText() {
 	for (i = 0; i<preguntasText.length; i++) {
-		var sel = formContainer.elements[preguntasText[i]];
+		var input = document.getElementById("pregunta"+preguntasText[i]).getElementsByTagName("input")[0];
 		var respuesta = respuestasText[i];
-		if (sel.value == respuesta){
+		if (input.value == respuesta){
 			darRespuestaHtml("P" +preguntasText[i]+": Correcto");
 			nota += 1;
 		} 
