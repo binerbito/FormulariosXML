@@ -96,8 +96,10 @@ function gestionarXml(dadesXml){
 }
 
 
-//se le pasa una pregunta del xml y busca su atributo title y lo plasma en un <h3> en el html
+//IMPRIMIR EN EL HTML
+
 function imprimirTituloPregunta(i, xmlDoc){
+	//se le pasa una pregunta del xml y busca su atributo title y lo plasma en un <h3> en el html
 	var tituloPregunta = document.createElement("h3");
 	tituloPregunta.innerHTML=xmlDoc.getElementsByTagName("title")[i].innerHTML;
 	document.getElementById('pregunta'+i).appendChild(tituloPregunta);
@@ -186,7 +188,9 @@ function imprimirBotonCorregir() {
 	formContainer.appendChild(botonCorregir);
 }
 
-//CORREGIR
+
+//CORREGIR LAS PREGUNTAS
+
 function corregirSelect() {
   //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
@@ -214,36 +218,33 @@ function corregirText() {
 	}
 }
 
-/* 
-// ---------------------------- REVISAR ----------------------------
-*/
-
 function corregirCheckBox(){
-	for (var k = 0; k < preguntasCheckBox.length; k++){
-		var inputsCheckBox = document.getElementById('pregunta'+preguntasCheckBox[k]).getElementsByTagName('input');
-		var escorrecta = false;
-	  	for (var i = 0; i < inputsCheckBox.lenght; i++) {  //"color" es el nombre asignado a todos los checkbox
-			if (inputsCheckBox[i].checked) {     
-		  		for (var j = 0; j < respuestasCheckBox[k].length; j++) {
-		  			if (i==respuestasCheckBox[k][j]) {
-		  				escorrecta = true;
-		  			}
+	for (i = 0; i<preguntasCheckBox.length; i++) {
+		var inputs = document.getElementById("pregunta"+preguntasCheckBox[i]).getElementsByTagName("input");
+	 	var bandera = 0; 
+	  	for (j = 0; j < inputs.length; j++){
+	  		var encontrado = false;
+		  	if (inputs[j].checked) { 
+		  		bandera = 1;
+		  		for (k = 0; k < respuestasCheckBox[i].length; k++){
+		  			if(j == respuestasCheckBox[i][k])	{
+		  				nota += 1.0/respuestasCheckBox[i].length;
+		  				darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": correcta");
+		  				encontrado = true;
+		  				break;
+		  			} 
 		  		}
-		    	//si es correcta sumamos y ponemos mensaje, si no es correcta restamos y ponemos mensaje.
-		    	if (escorrecta) {
-		    		nota +=1.0/respuestasCheckBox[k].length;  //dividido por el número de respuestas correctas   
-		    		darRespuestaHtml("P"+preguntasCheckBox[k]+" opcion "+i+": correcta");
-		 		} else {
-		    		nota -=1.0/respuestasCheckBox[k].length;  //dividido por el número de respuestas correctas   
-		    		darRespuestaHtml("P"+preguntasCheckBox[k]+" opcion "+i+": incorrecta");
-		 		}
-		 		escorrecta = false;
-			} 
+		  		if (!encontrado){
+		  			nota -= 1.0/respuestasCheckBox[i].length;
+		  			darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": incorrecta");
+		  		}
+		  	}	
+	  	}
+	  	if (bandera == 0){
+			darRespuestaHtml("P"+preguntasCheckBox[i]+": No has seleccionado ninguna respuesta");
 		}
 	}
 }
-
-// -----------------------------------------------------------------
 
 function corregirRadio() {
 	for (i = 0; i<preguntasRadio.length; i++) {
@@ -272,16 +273,20 @@ function corregirSelectMultiple() {
 	  	var sel = document.getElementById("pregunta"+preguntasSelectMultiple[i]).getElementsByTagName("select")[0];
 	  	var bandera = 0; 
 	  	for (j = 0; j < sel.length; j++){
+	  		var encontrado = false;
 		  	if (sel[j].selected) { 
 		  		bandera = 1;
 		  		for (k = 0; k < respuestasSelectMultiple[i].length; k++){
 		  			if(j == respuestasSelectMultiple[i][k])	{
 		  				nota += 1.0/respuestasSelectMultiple[i].length;
 		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": correcta");
-		  			} else {
-		  				nota -= 1.0/respuestasSelectMultiple[i].length;
-		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta");
-		  			}
+		  				encontrado = true;
+		  				break;
+		  			} 
+		  		}
+		  		if (!encontrado){
+		  			nota -= 1.0/respuestasSelectMultiple[i].length;
+		  			darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta");
 		  		}
 		  	}	
 	  	}
