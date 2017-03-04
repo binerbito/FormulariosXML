@@ -10,6 +10,12 @@ var respuestasText = [];
 var preguntasCheckBox = [];
 var respuestasCheckBox = [];
 
+var preguntasRadio = [];
+var respuestasRadio = [];
+
+var preguntasSelectMultiple = [];
+var respuestasSelectMultiple = [];
+
 
 window.onload = function(){ 
 	//CORREGIR al apretar el botón
@@ -19,6 +25,8 @@ window.onload = function(){
 		corregirSelect();
 		corregirText();
 		corregirCheckBox();
+		corregirRadio();
+		corregirSelectMultiple();
 		presentarNota();
 	 	return false;
 	}
@@ -65,17 +73,21 @@ function gestionarXml(dadesXml){
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirCheckBox(i, xmlDoc);
 				preguntasCheckBox.push(i);
-				agregarRespuestasCheckbox(i, xmlDoc);
+				agregarRespuestas(i, xmlDoc, respuestasCheckBox);
 				break;
 			case "radio":
 				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirRadioButton(i, xmlDoc);
+				preguntasRadio.push(i);
+				respuestasRadio.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[0].innerHTML));
 				break;
 			case "select multiple":
 				crearDivPregunta(i);
 				imprimirTituloPregunta(i, xmlDoc);
 				imprimirSelectMultiple(i, xmlDoc);
+				preguntasSelectMultiple.push(i);
+				agregarRespuestas(i, xmlDoc, respuestasSelectMultiple);
 				break;
 		}
 	}
@@ -202,19 +214,89 @@ function corregirText() {
 	}
 }
 
+/* 
+// ---------------------------- REVISAR ----------------------------
+*/
+
 function corregirCheckBox(){
-	for (i = 0; i<preguntasCheckBox.length; i++) {
-		//var input = formContainer.getElementsByTagName('input')[].getAttribute('name')=="preg"+preguntasCheckBox[i];
-		//alert(input);
+	for (var k = 0; k < preguntasCheckBox.length; k++){
+		var inputsCheckBox = document.getElementById('pregunta'+preguntasCheckBox[k]).getElementsByTagName('input');
+		var escorrecta = false;
+	  	for (var i = 0; i < inputsCheckBox.lenght; i++) {  //"color" es el nombre asignado a todos los checkbox
+			if (inputsCheckBox[i].checked) {     
+		  		for (var j = 0; j < respuestasCheckBox[k].length; j++) {
+		  			if (i==respuestasCheckBox[k][j]) {
+		  				escorrecta = true;
+		  			}
+		  		}
+		    	//si es correcta sumamos y ponemos mensaje, si no es correcta restamos y ponemos mensaje.
+		    	if (escorrecta) {
+		    		nota +=1.0/respuestasCheckBox[k].length;  //dividido por el número de respuestas correctas   
+		    		darRespuestaHtml("P"+preguntasCheckBox[k]+" opcion "+i+": correcta");
+		 		} else {
+		    		nota -=1.0/respuestasCheckBox[k].length;  //dividido por el número de respuestas correctas   
+		    		darRespuestaHtml("P"+preguntasCheckBox[k]+" opcion "+i+": incorrecta");
+		 		}
+		 		escorrecta = false;
+			} 
+		}
 	}
 }
 
-function agregarRespuestasCheckbox(i, xmlDoc) {
+// -----------------------------------------------------------------
+
+function corregirRadio() {
+	for (i = 0; i<preguntasRadio.length; i++) {
+		var preguntaRadio = document.getElementById('pregunta'+preguntasRadio[i]);
+		var bandera = 0;
+		for (j = 0; j<preguntaRadio.getElementsByTagName('input').length; j++) {
+			if (preguntaRadio.getElementsByTagName('input')[j].checked){
+				bandera = 1;
+				if (j == respuestasRadio[i]){
+					nota +=1.0;
+		    		darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": correcta");	
+				} else{
+					nota -= 1.0;
+					darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": incorrecta");
+				}
+			} 				
+		}
+		if (bandera == 0){
+			darRespuestaHtml("P"+preguntasRadio[i]+": No has seleccionado ninguna respuesta");
+		}
+	}
+}
+
+function corregirSelectMultiple() {
+	for (i = 0; i<preguntasSelectMultiple.length; i++) {
+	  	var sel = document.getElementById("pregunta"+preguntasSelectMultiple[i]).getElementsByTagName("select")[0];
+	  	var bandera = 0; 
+	  	for (j = 0; j < sel.length; j++){
+		  	if (sel[j].selected) { 
+		  		bandera = 1;
+		  		for (k = 0; k < respuestasSelectMultiple[i].length; k++){
+		  			if(j == respuestasSelectMultiple[i][k])	{
+		  				nota += 1.0/respuestasSelectMultiple[i].length;
+		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": correcta");
+		  			} else {
+		  				nota -= 1.0/respuestasSelectMultiple[i].length;
+		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta");
+		  			}
+		  		}
+		  	}	
+	  	}
+	  	if (bandera == 0){
+			darRespuestaHtml("P"+preguntasSelectMultiple[i]+": No has seleccionado ninguna respuesta");
+		}
+	}
+}
+
+function agregarRespuestas(i, xmlDoc, arrayRespuestas) {
 	var respuestasPregunta = [];
 	for (j= 0; j <xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer").length; j++) {
 		respuestasPregunta.push(parseInt(xmlDoc.getElementsByTagName("question")[i].getElementsByTagName("answer")[j].innerHTML));
 	}
-	respuestasCheckBox.push(respuestasPregunta);
+	arrayRespuestas.push(respuestasPregunta);
 }
 
 //UTILIDADES
