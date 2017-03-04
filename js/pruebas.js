@@ -1,3 +1,6 @@
+//**********************************************************************************************
+//VARIABLES DE CONTROL
+//**********************************************************************************************
 var formContainer = null;
 var nota = 0.0;
 
@@ -17,17 +20,22 @@ var preguntasSelectMultiple = [];
 var respuestasSelectMultiple = [];
 
 
+//**********************************************************************************************
+//AL CARGAR LA PAGINA
+//**********************************************************************************************
 window.onload = function(){ 
 	//CORREGIR al apretar el botón
 	formContainer=document.getElementById('myform');
 	formContainer.onsubmit=function(){
 		inicializar();
-		corregirSelect();
-		corregirText();
-		corregirCheckBox();
-		corregirRadio();
-		corregirSelectMultiple();
-		presentarNota();
+		if (comprobar()){
+			corregirSelect();
+			corregirText();
+			corregirCheckBox();
+			corregirRadio();
+			corregirSelectMultiple();
+			presentarNota();
+	 	}
 	 	return false;
 	}
 
@@ -94,10 +102,10 @@ function gestionarXml(dadesXml){
 	imprimirEspacios(3);
 	imprimirBotonCorregir();
 }
-
-
+ 
+//**********************************************************************************************
 //IMPRIMIR EN EL HTML
-
+//**********************************************************************************************
 function imprimirTituloPregunta(i, xmlDoc){
 	//se le pasa una pregunta del xml y busca su atributo title y lo plasma en un <h3> en el html
 	var tituloPregunta = document.createElement("h3");
@@ -188,9 +196,9 @@ function imprimirBotonCorregir() {
 	formContainer.appendChild(botonCorregir);
 }
 
-
+//**********************************************************************************************
 //CORREGIR LAS PREGUNTAS
-
+//**********************************************************************************************
 function corregirSelect() {
   //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
@@ -304,8 +312,9 @@ function agregarRespuestas(i, xmlDoc, arrayRespuestas) {
 	arrayRespuestas.push(respuestasPregunta);
 }
 
+//**********************************************************************************************
 //UTILIDADES
-
+//**********************************************************************************************
 function crearDivPregunta(i) {
 	var div = document.createElement('div');
 	div.id = "pregunta"+i;
@@ -325,10 +334,10 @@ function darRespuestaHtml(r){
 }
 
 function presentarNota(){
-	darRespuestaHtml("Nota: "+nota+" puntos sobre 10");
+	darRespuestaHtml("Nota: "+nota.toFixed(2)+" puntos sobre 10");
 }
 
-	//funcion para hacer que el select multiple se pueda aplicar sin la tecla Ctrl
+//funcion para hacer que el select multiple se pueda aplicar sin la tecla Ctrl
 window.onmousedown = function (e) {
     var el = e.target;
     if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
@@ -344,28 +353,14 @@ window.onmousedown = function (e) {
     }
 }
 
-//Comprobar que se han introducido datos en el formulario
-/*
 function comprobar(){
-	var f=formContainer;
-	var checked=false;
-    for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
-    	if (f.color[i].checked) checked=true;
+	for (i = 0; i < preguntasText.length; i++){
+		var input = document.getElementById("pregunta"+preguntasText[i]).getElementsByTagName("input")[0];
+		if (input.value=="") {
+			input.focus();
+			alert("Escribe un numero en la pregunta "+preguntasText[i]);
+			return false;
+		}
 	}
-	if (f.elements[0].value=="") {
-		f.elements[0].focus();
-		alert("Escribe un número");
-		return false;
-	} else if (f.elements[1].selectedIndex==0) {
-		f.elements[1].focus();
-		alert("Selecciona una opción");
-		return false;
-	} if (!checked) {    
-		document.getElementsByTagName("h3")[2].focus();
-		alert("Selecciona una opción del checkbox");
-		return false;
-	} else  return true;
+	return true;
 }
-*/
-
-//futuras ideas: clasificar las preguntas por divs
