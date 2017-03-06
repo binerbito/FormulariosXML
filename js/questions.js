@@ -181,14 +181,10 @@ function comprobar(){
    for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
    	if (f.color[i].checked) checked=true;
 }
-for (i = 0; i < preguntasText.length; i++){
-	var input = document.getElementById("pregunta"+i).getElementsByTagName("input")[0];
-	if (input.value="") {
-	input.focus();
+if (f.elements[0].value=="") {
+	f.elements[0].focus();
 	alert("Escribe un número");
 	return false;
-	}
-}
 } else if (f.elements[1].selectedIndex==0) {
 	f.elements[1].focus();
 	alert("Selecciona una opción");
