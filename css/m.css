@@ -50,19 +50,20 @@ h3{
     list-style-type: none;
     margin: 0;
     padding: 0;
+    width: 100%;
     overflow: hidden;
     background-color: #CD5360;
 }
 
-#headMenu li {
-    float: left;
+#headMenu img {
+    vertical-align: middle;
+    width: 30px;
 }
 
 #headMenu li a {
     display: block;
     color: white;
-    text-align: center;
-    padding: 14px 16px;
+    padding: 15px 16px;
     text-decoration: none;
 }
 
