@@ -137,6 +137,7 @@ form h3 {
 #resultadosDiv img {
     width: 25px;
     vertical-align: middle;
+    margin-left: 10px;
 }
 
 .correcto {
@@ -148,7 +149,7 @@ form h3 {
 }
 
 #nota {
-    font-size: 3vw;
+    font-size: 7vw;
     margin:auto;
     margin-top: 4%;
     display:table;
@@ -200,3 +201,9 @@ form h3 {
     width: 80%;
 }
 
+.separador {
+    width: 106.2%;
+    height: 3px;
+    background-color: #286DA8;
+    margin-left: -3.1%; 
+}

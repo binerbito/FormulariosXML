@@ -52,6 +52,7 @@ window.onload = function(){
 			document.getElementById('myform').style.display="none";
 			document.getElementById('headMenu').focus();
 			presentarNota();
+			dibujarSeparador('resultadosDiv');
 			corregirSelect();
 			corregirText();
 			corregirCheckBox();
@@ -238,6 +239,7 @@ function corregirSelect() {
   		darRespuestaIncorrectaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
   		darRespuestaHtml("La respuesta correcta es: "+valorRespuestaSelect[i]);
   	}
+  	dibujarSeparador('resultadosDiv');
   }
 }
 
@@ -254,6 +256,7 @@ function corregirText() {
 			darRespuestaIncorrectaHtml("P" +preguntasText[i] + ": Incorrecto");
 			darRespuestaHtml("La respuesta correcta es: "+respuestasText[i]);
 		}
+		dibujarSeparador('resultadosDiv');
 	}
 }
 
@@ -293,6 +296,7 @@ function corregirCheckBox(){
 	  	if (bandera == 0){
 			darRespuestaHtml("P"+preguntasCheckBox[i]+": No has seleccionado ninguna respuesta");
 		}
+		dibujarSeparador('resultadosDiv');
 	}
 }
 
@@ -318,6 +322,7 @@ function corregirRadio() {
 		if (bandera == 0){
 			darRespuestaHtml("P"+preguntasRadio[i]+": No has seleccionado ninguna respuesta");
 		}
+		dibujarSeparador('resultadosDiv');
 	}
 }
 
@@ -357,6 +362,7 @@ function corregirSelectMultiple() {
 	  	if (bandera == 0){
 			darRespuestaHtml("P"+preguntasSelectMultiple[i]+": No has seleccionado ninguna respuesta");
 		}
+		dibujarSeparador('resultadosDiv');
 	}
 }
 
@@ -469,6 +475,15 @@ function presentarNota(){
 
 function actualizarNota() {
 	document.getElementById("nota").textContent="Nota: "+nota.toFixed(2)+" puntos sobre 10";
+	if (nota >=5) {
+		document.getElementById("nota").style.color = "#27b63a";
+	}
+}
+
+function dibujarSeparador(divName) {
+	var p = document.createElement("p");
+	p.className = "separador";
+	document.getElementById(divName).appendChild(p);
 }
 
 //funcion para hacer que el select multiple se pueda aplicar sin la tecla Ctrl

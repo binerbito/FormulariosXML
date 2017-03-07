@@ -154,9 +154,8 @@ form h3 {
 	margin-top: 4%;
 	display:table;
 	padding: 16px 10px;
-	background-color: #90CAF9; 
     border: 2px solid #ab2e3b;
-    color: #ab2e3b;
+    color: #e64439;
 }
 
 /******************************************************************************/
@@ -201,3 +200,9 @@ form h3 {
 	width: 80%;
 }
 
+.separador {
+	width: 106.2%;
+	height: 3px;
+	background-color: #286DA8;
+	margin-left: -3.1%;	
+}
