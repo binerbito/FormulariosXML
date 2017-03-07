@@ -1,23 +1,26 @@
 body,html{
-	margin:0px
+	margin:0px;
 }
 
 body{
 	width:70%;
 	padding-left:15%;
-	padding-right:15%
+	padding-right:15%;
+	background-image: url("../img/body_bg.jpg");
+	font-family: 'Alegreya Sans';
 }
 
 body,input,select,label{
-	font-size:2vw
+	font-size:1.5vw;
+	font-family: 'Alegreya Sans';
 }
 
 h3{
-	font-size:3vw
+	font-size:2vw;
 }
 
 input,select{
-	width:50%
+	width:50%;
 }
 
 input[type=radio]{
@@ -25,36 +28,61 @@ input[type=radio]{
 }
 
 input[type=checkbox]{
-	width:5%;zoom:1.5
+	width:5%;zoom:1.5;
 }
 
 form{
-	background-color:aliceblue;
-	padding:3%
+	background-color:#90CAF9;
+	padding:3%;
 }
 
+form h3 {
+	font-family: "Alegreya SC";
+}
+
+#myform {
+	text-align: center;
+}
+
+#myform div {
+	text-align: left;
+}
+
+#headBanner {
+	background-image: url("../img/headBanner.jpg");
+	background-size: 100% 145%;
+}
 
 #headBanner img {
 	width: 20%;
+	left: 0px;
+	vertical-align: middle;
+	margin: 10px;
+}
+#headBanner p{
+	display: inline-block;
+	vertical-align: middle;
+	color: white;
+	text-shadow: 2px 2px 4px #000000;
 }
 
 /******************************************************************************/
 /* MENU */
 /******************************************************************************/
 /* Remove margins and padding from the list, and add a black background color */
-ul {
+#headMenu {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #CD5360;
 }
 
-li {
+#headMenu li {
     float: left;
 }
 
-li a {
+#headMenu li a {
     display: block;
     color: white;
     text-align: center;
@@ -63,6 +91,55 @@ li a {
 }
 
 /* Change the link color to #111 (black) on hover */
-li a:hover {
-    background-color: #111;
+#headMenu li a:hover {
+    background-color: #ab2e3b;
+}
+
+.active {
+	background-color: #ab2e3b;
+}
+
+.contenido {
+	background-color:#90CAF9;
+	padding:3%;
+}
+.contenido h3 {
+	color: #926640;
+	text-align: center;
+	font-family: "Alegreya SC";
+}
+.contenido li {
+	padding: 10px 20px;
+}
+
+.contenido img{
+	width: 50%;
+	position: relative;
+	left: 25%;
+}
+
+#equipoDocente {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+}
+#equipoDocente li {
+    float: left;
+    width: 33%;
+    padding: 0px;
+    color: #ab2e3b;
+}
+
+#equipoDocente img {
+	position: relative;
+	left: 0%;
+	width: 80%;
+}
+
+#resultadosDiv {
+	background-color:#90CAF9;
+	padding:3%;
+
 }

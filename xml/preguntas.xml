@@ -35,11 +35,11 @@
 	<question id="mlag_005">
 		<type>checkbox</type>
 		<title>¿De qué animal/es se obtiene la tripa de gato? (para hacer cuerdas de violines)</title>
-		<option>oveja</option>
-		<option>gato</option>
-		<option>carnero</option>
-		<option>iguana</option>
-		<option>perro</option>
+		<option>Oveja</option>
+		<option>Gato</option>
+		<option>Carnero</option>
+		<option>Iguana</option>
+		<option>Perro</option>
 		<answer>0</answer>
 		<answer>2</answer>
 	</question>
