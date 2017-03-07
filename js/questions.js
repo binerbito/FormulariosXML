@@ -215,6 +215,7 @@ function imprimirEspacios(numeroEspacios) {
 
 function imprimirBotonCorregir() {
 	var botonCorregir = document.createElement("input");
+	botonCorregir.id = "botonCorregir";
 	botonCorregir.type = "submit";
 	botonCorregir.value = "Corregir";
 	formContainer.appendChild(botonCorregir);
@@ -231,11 +232,13 @@ function corregirSelect() {
   	var sel = document.getElementById("pregunta"+preguntasSelect[i]).getElementsByTagName("select")[0];
   	var respuesta = respuestasSelect[i];
   	if (sel.selectedIndex==respuesta) { 
-  		darRespuestaHtml("P" +preguntasSelect[i]+": Correcto");
+  		darRespuestaHtml("P" +preguntasSelect[i]+": Correcto +1 punto");
+  		agregarIconoCorrecion("v");
   		nota +=1;
   	}
   	else {
   		darRespuestaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
+  		agregarIconoCorrecion();
   		darRespuestaHtml("La respuesta correcta es: "+valorRespuestaSelect[i]);
   	}
   }
@@ -246,7 +249,7 @@ function corregirText() {
 		var input = document.getElementById("pregunta"+preguntasText[i]).getElementsByTagName("input")[0];
 		var respuesta = respuestasText[i];
 		if (input.value == respuesta){
-			darRespuestaHtml("P" +preguntasText[i]+": Correcto");
+			darRespuestaHtml("P" +preguntasText[i]+": Correcto +1 punto");
 			nota += 1;
 		} 
 		else {
@@ -267,16 +270,18 @@ function corregirCheckBox(){
 		  		bandera = 1;
 		  		for (k = 0; k < respuestasCheckBox[i].length; k++){
 		  			if(j == respuestasCheckBox[i][k])	{
-		  				nota += 1.0/respuestasCheckBox[i].length;
-		  				darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": correcta");
+		  				puntos = 1.0/respuestasCheckBox[i].length;
+		  				nota += puntos;
+		  				darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": correcta +"+puntos.toFixed(2));
 		  				encontrado = true;
 		  				break;
 		  			} 
 		  		}
 		  		if (!encontrado){
 		  			hayFallo = true;
-		  			nota -= 1.0/respuestasCheckBox[i].length;
-		  			darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": incorrecta");
+		  			puntos = 1.0/respuestasCheckBox[i].length;
+		  			nota -= puntos;
+		  			darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": incorrecta -"+puntos.toFixed(2));
 		  		}
 		  	}	
 	  	}
@@ -301,11 +306,13 @@ function corregirRadio() {
 			if (preguntaRadio.getElementsByTagName('input')[j].checked){
 				bandera = 1;
 				if (j == respuestasRadio[i]){
-					nota +=1.0;
-		    		darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": correcta");	
+					puntos = 1;
+					nota += puntos;
+		    		darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": correcta +"+puntos);	
 				} else{
-					nota -= 1.0;
-					darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": incorrecta");
+					puntos = 1;
+					nota -= puntos;
+					darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": incorrecta -"+puntos);
 					darRespuestaHtml("La respuesta correcta es: "+valorRespuestaRadio[i]);
 				}	
 			} 				
@@ -327,16 +334,18 @@ function corregirSelectMultiple() {
 		  		bandera = 1;
 		  		for (k = 0; k < respuestasSelectMultiple[i].length; k++){
 		  			if(j == respuestasSelectMultiple[i][k])	{
-		  				nota += 1.0/respuestasSelectMultiple[i].length;
-		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": correcta");
+		  				puntos = 1.0/respuestasSelectMultiple[i].length;
+		  				nota += puntos;
+		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": correcta +"+puntos);
 		  				encontrado = true;
 		  				break;
 		  			} 
 		  		}
 		  		if (!encontrado){
 		  			hayFallo = true;
-		  			nota -= 1.0/respuestasSelectMultiple[i].length;
-		  			darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta");
+		  			puntos = 1.0/respuestasSelectMultiple[i].length;
+		  			nota -= puntos;
+		  			darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta -"+puntos);
 		  		}
 		  	}	
 	  	}
@@ -383,6 +392,18 @@ function crearDivPregunta(i) {
 function inicializar(){
 	document.getElementById('resultadosDiv').innerHTML = "";
 	nota=0.0;
+}
+
+function agregarIconoCorrecion(valoracion) {
+	if (valoracion=="v") {
+		var icon = document.createElement("img");
+		icon.src="img/correcto.png";
+		document.getElementById('resultadosDiv').appendChild(icon);
+	} else {
+		var icon = document.createElement("img");
+		icon.src="img/incorrecto.png";
+		document.getElementById('resultadosDiv').appendChild(icon);
+	}
 }
 
 function darRespuestaHtml(r){
