@@ -1,4 +1,7 @@
-body,html{
+/******************************************************************************/
+/* ESTRUCTURA GENERAL DOCUMENTO */
+/******************************************************************************/
+body,html {
 	margin:0px
 }
 
@@ -10,7 +13,7 @@ body{
     font-family: 'Alegreya Sans';
 }
 
-body,input,select,label{
+body,input,select,label {
 	font-size:5vw;
     font-family: 'Alegreya Sans';
 }
@@ -19,6 +22,61 @@ h3{
 	font-size:7vw
 }
 
+/******************************************************************************/
+/*CABECERA*/
+/******************************************************************************/
+#headBanner {
+    background-image: url("../img/headBanner.jpg");
+    background-size: 100% 145%;
+    text-align: center;
+}
+
+#headBanner img {
+    width: 50%;
+    vertical-align: middle;
+    margin: 10px;
+}
+#headBanner p{
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+/******************************************************************************/
+/*MENU*/
+/******************************************************************************/
+#headMenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #CD5360;
+}
+
+#headMenu li {
+    float: left;
+}
+
+#headMenu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#headMenu li a:hover {
+    background-color: #ab2e3b;
+}
+
+.active {
+    background-color: #ab2e3b;
+}
+
+/******************************************************************************/
+/*FORMULARIO*/
+/******************************************************************************/
 input,select{
 	width:80%
 }
@@ -47,57 +105,62 @@ form h3 {
     text-align: left;
 }
 
-#headBanner {
-    background-image: url("../img/headBanner.jpg");
-    background-size: 100% 145%;
-    text-align: center;
-}
-
-#headBanner img {
-    width: 50%;
-    vertical-align: middle;
-    margin: 10px;
-}
-#headBanner p{
-    display: inline-block;
-    vertical-align: middle;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
-}
-
 /******************************************************************************/
-/*MENU*/
+/* CORRECCIONES Y RESULTADOS */
 /******************************************************************************/
-/* Remove margins and padding from the list, and add a black background color */
-#headMenu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #CD5360;
-}
-
-#headMenu li {
-    float: left;
-}
-
-#headMenu li a {
-    display: block;
-    color: white;
+#botonCorregir {
+    background-color: #90CAF9; /* Green */
+    border: 2px solid #ab2e3b;
+    color: #ab2e3b;
+    padding: 16px 32px;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
-/* Change the link color to #111 (black) on hover */
-#headMenu li a:hover {
-    background-color: #ab2e3b;
+#botonCorregir:hover{
+    background-color: #CD5360;
+    color: white;
 }
 
-.active {
-    background-color: #ab2e3b;
+#resultadosDiv {
+    background-color:#90CAF9;
+    padding:3%;
+
 }
 
+#resultadosDiv img {
+    width: 25px;
+    vertical-align: middle;
+}
+
+.correcto {
+    color: #27b63a;
+}
+
+.incorrecto {
+    color: #e64439;
+}
+
+#nota {
+    font-size: 3vw;
+    margin:auto;
+    margin-top: 4%;
+    display:table;
+    padding: 16px 10px;
+    background-color: #90CAF9; 
+    border: 2px solid #ab2e3b;
+    color: #ab2e3b;
+}
+
+/******************************************************************************/
+/* CONTENIDO CUERPO */
+/******************************************************************************/
 .contenido {
     background-color:#90CAF9;
     padding:3%;
@@ -137,32 +200,3 @@ form h3 {
     width: 80%;
 }
 
-#resultadosDiv {
-    background-color:#90CAF9;
-    padding:3%;
-
-}
-
-#botonCorregir {
-    background-color: #90CAF9; /* Green */
-    border: 2px solid #ab2e3b;
-    color: #ab2e3b;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-#botonCorregir:hover{
-    background-color: #CD5360;
-    color: white;
-}
-
-#resultadosDiv img {
-    width: 25px;
-    vertical-align: middle;
-}

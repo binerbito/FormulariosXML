@@ -51,12 +51,13 @@ window.onload = function(){
 		if (comprobar()){
 			document.getElementById('myform').style.display="none";
 			document.getElementById('headMenu').focus();
+			presentarNota();
 			corregirSelect();
 			corregirText();
 			corregirCheckBox();
 			corregirRadio();
 			corregirSelectMultiple();
-			presentarNota();
+			actualizarNota();
 	 	}
 	 	return false;
 	}
@@ -128,7 +129,7 @@ function gestionarXml(dadesXml){
 }
  
 //**********************************************************************************************
-//IMPRIMIR EN EL HTML
+//IMPRIMIR TITULOS Y OPCIONES EN EL FORMULARIO 
 //**********************************************************************************************
 function imprimirTituloPregunta(i, xmlDoc){
 	//se le pasa una pregunta del xml y busca su atributo title y lo plasma en un <h3> en el html
@@ -222,12 +223,9 @@ function imprimirBotonCorregir() {
 }
 
 //**********************************************************************************************
-//CORREGIR LAS PREGUNTAS
+//CORREGIR LAS PREGUNTAS Y AÑADIR RESULTADOS Y RESPUESTAS CORRECTAS
 //**********************************************************************************************
 function corregirSelect() {
-  //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
-  //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
-  //luego comparar ese value con el value guardado en answer
   for (i = 0; i<preguntasSelect.length; i++) {
   	var sel = document.getElementById("pregunta"+preguntasSelect[i]).getElementsByTagName("select")[0];
   	var respuesta = respuestasSelect[i];
@@ -362,6 +360,9 @@ function corregirSelectMultiple() {
 	}
 }
 
+//**********************************************************************************************
+//UTILIDADES Y AUXILIARES
+//**********************************************************************************************
 function agregarRespuestas(i, xmlDoc, arrayRespuestas, arrayValoresRespuestas) {
 	var respuestasPregunta = [];
 	var valorRespuestasPregunta = [];
@@ -380,9 +381,6 @@ function agregarRespuestasRadio(i, xmlDoc, arrayRespuestas, arrayValoresRespuest
 	arrayValoresRespuestas.push(xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option')[arrayRespuestas[arrayRespuestas.length - 1]].innerHTML);
 }
 
-//**********************************************************************************************
-//UTILIDADES
-//**********************************************************************************************
 function crearDivPregunta(i) {
 	var div = document.createElement('div');
 	div.id = "pregunta"+i;
@@ -459,15 +457,18 @@ function darRespuestaIncorrectaHtml(r, puntuacion){
 	document.getElementById('resultadosDiv').appendChild(br);
 }
 
-
 function presentarNota(){
 	var p = document.createElement("span");
-	var node = document.createTextNode("Nota: "+nota.toFixed(2)+" puntos sobre 10");
+	var node = document.createTextNode("");
 	p.appendChild(node);
-	p.className = "nota";
+	p.id = "nota";
 	var br = document.createElement("br");
 	document.getElementById('resultadosDiv').appendChild(p);
 	document.getElementById('resultadosDiv').appendChild(br);
+}
+
+function actualizarNota() {
+	document.getElementById("nota").textContent="Nota: "+nota.toFixed(2)+" puntos sobre 10";
 }
 
 //funcion para hacer que el select multiple se pueda aplicar sin la tecla Ctrl
