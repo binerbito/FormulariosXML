@@ -232,13 +232,12 @@ function corregirSelect() {
   	var sel = document.getElementById("pregunta"+preguntasSelect[i]).getElementsByTagName("select")[0];
   	var respuesta = respuestasSelect[i];
   	if (sel.selectedIndex==respuesta) { 
-  		darRespuestaHtml("P" +preguntasSelect[i]+": Correcto +1 punto");
-  		agregarIconoCorrecion("v");
-  		nota +=1;
+  		puntos = 1;
+  		darRespuestaCorrectaHtml("P" +preguntasSelect[i]+": Correcto", " +"+puntos+" punto");
+  		nota += puntos;
   	}
   	else {
-  		darRespuestaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
-  		agregarIconoCorrecion();
+  		darRespuestaIncorrectaHtml("P" +preguntasSelect[i]+ ": Incorrecto");
   		darRespuestaHtml("La respuesta correcta es: "+valorRespuestaSelect[i]);
   	}
   }
@@ -249,11 +248,12 @@ function corregirText() {
 		var input = document.getElementById("pregunta"+preguntasText[i]).getElementsByTagName("input")[0];
 		var respuesta = respuestasText[i];
 		if (input.value == respuesta){
-			darRespuestaHtml("P" +preguntasText[i]+": Correcto +1 punto");
-			nota += 1;
+			puntos = 1;
+			darRespuestaCorrectaHtml("P" +preguntasText[i]+": Correcto", " +"+puntos+" punto");
+			nota += puntos;
 		} 
 		else {
-			darRespuestaHtml("P" +preguntasText[i] + ": Incorrecto");
+			darRespuestaIncorrectaHtml("P" +preguntasText[i] + ": Incorrecto");
 			darRespuestaHtml("La respuesta correcta es: "+respuestasText[i]);
 		}
 	}
@@ -272,7 +272,7 @@ function corregirCheckBox(){
 		  			if(j == respuestasCheckBox[i][k])	{
 		  				puntos = 1.0/respuestasCheckBox[i].length;
 		  				nota += puntos;
-		  				darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": correcta +"+puntos.toFixed(2));
+		  				darRespuestaCorrectaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": correcta", " +"+puntos.toFixed(2)+" puntos");
 		  				encontrado = true;
 		  				break;
 		  			} 
@@ -281,7 +281,7 @@ function corregirCheckBox(){
 		  			hayFallo = true;
 		  			puntos = 1.0/respuestasCheckBox[i].length;
 		  			nota -= puntos;
-		  			darRespuestaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": incorrecta -"+puntos.toFixed(2));
+		  			darRespuestaIncorrectaHtml("P"+preguntasCheckBox[i]+" opcion "+j+": incorrecta", " -"+puntos.toFixed(2)+" puntos");
 		  		}
 		  	}	
 	  	}
@@ -308,11 +308,11 @@ function corregirRadio() {
 				if (j == respuestasRadio[i]){
 					puntos = 1;
 					nota += puntos;
-		    		darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": correcta +"+puntos);	
+		    		darRespuestaCorrectaHtml("P"+preguntasRadio[i]+" opcion "+j+": correcta", " +"+puntos+" punto");	
 				} else{
 					puntos = 1;
 					nota -= puntos;
-					darRespuestaHtml("P"+preguntasRadio[i]+" opcion "+j+": incorrecta -"+puntos);
+					darRespuestaIncorrectaHtml("P"+preguntasRadio[i]+" opcion "+j+": incorrecta", " -"+puntos+" punto");
 					darRespuestaHtml("La respuesta correcta es: "+valorRespuestaRadio[i]);
 				}	
 			} 				
@@ -336,7 +336,7 @@ function corregirSelectMultiple() {
 		  			if(j == respuestasSelectMultiple[i][k])	{
 		  				puntos = 1.0/respuestasSelectMultiple[i].length;
 		  				nota += puntos;
-		  				darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": correcta +"+puntos);
+		  				darRespuestaCorrectaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": correcta", " +"+puntos.toFixed(2)+" puntos");
 		  				encontrado = true;
 		  				break;
 		  			} 
@@ -345,7 +345,7 @@ function corregirSelectMultiple() {
 		  			hayFallo = true;
 		  			puntos = 1.0/respuestasSelectMultiple[i].length;
 		  			nota -= puntos;
-		  			darRespuestaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta -"+puntos);
+		  			darRespuestaIncorrectaHtml("P"+preguntasSelectMultiple[i]+" opcion "+j+": incorrecta", " -"+puntos.toFixed(2)+" puntos");
 		  		}
 		  	}	
 	  	}
@@ -394,7 +394,7 @@ function inicializar(){
 	nota=0.0;
 }
 
-function agregarIconoCorrecion(valoracion) {
+function agregarIconoCorreccion(valoracion) {
 	if (valoracion=="v") {
 		var icon = document.createElement("img");
 		icon.src="img/correcto.png";
@@ -407,14 +407,67 @@ function agregarIconoCorrecion(valoracion) {
 }
 
 function darRespuestaHtml(r){
-	var p = document.createElement("p");
+	var p = document.createElement("span");
 	var node = document.createTextNode(r);
 	p.appendChild(node);
+	var br = document.createElement("br");
 	document.getElementById('resultadosDiv').appendChild(p);
+	document.getElementById('resultadosDiv').appendChild(br);
 }
 
+function darRespuestaCorrectaHtml(r, puntuacion) {
+	var p = document.createElement("span");
+	var node = document.createTextNode(r);
+	p.appendChild(node);
+
+	var puntos = document.createElement("span");
+	var puntosNode = document.createTextNode(puntuacion);
+	puntos.appendChild(puntosNode);
+	puntos.className = "correcto";
+
+	var icon = document.createElement("img");
+	icon.src = "img/correcto.png";
+
+	var br = document.createElement("br");
+
+	document.getElementById('resultadosDiv').appendChild(p);
+	document.getElementById('resultadosDiv').appendChild(icon);
+	document.getElementById('resultadosDiv').appendChild(puntos);
+	document.getElementById('resultadosDiv').appendChild(br);
+}
+
+function darRespuestaIncorrectaHtml(r, puntuacion){
+	var p = document.createElement("span");
+	var node = document.createTextNode(r);
+	p.appendChild(node);
+
+	var puntos = document.createElement("span");
+	var puntosNode = document.createTextNode(puntuacion);
+	puntos.appendChild(puntosNode);
+	puntos.className = "incorrecto";
+
+	var icon = document.createElement("img");
+	icon.src = "img/incorrecto.png";
+
+	var br = document.createElement("br");
+
+	document.getElementById('resultadosDiv').appendChild(p);
+	document.getElementById('resultadosDiv').appendChild(icon);
+	if (puntuacion != null) {
+		document.getElementById('resultadosDiv').appendChild(puntos);
+	}
+	document.getElementById('resultadosDiv').appendChild(br);
+}
+
+
 function presentarNota(){
-	darRespuestaHtml("Nota: "+nota.toFixed(2)+" puntos sobre 10");
+	var p = document.createElement("span");
+	var node = document.createTextNode("Nota: "+nota.toFixed(2)+" puntos sobre 10");
+	p.appendChild(node);
+	p.className = "nota";
+	var br = document.createElement("br");
+	document.getElementById('resultadosDiv').appendChild(p);
+	document.getElementById('resultadosDiv').appendChild(br);
 }
 
 //funcion para hacer que el select multiple se pueda aplicar sin la tecla Ctrl

@@ -145,7 +145,7 @@ form h3 {
 }
 
 #botonCorregir {
-	background-color: #90CAF9; /* Green */
+	background-color: #90CAF9; 
     border: 2px solid #ab2e3b;
     color: #ab2e3b;
     padding: 16px 32px;
@@ -166,4 +166,24 @@ form h3 {
 #resultadosDiv img {
 	width: 25px;
 	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.correcto {
+	color: #27b63a;
+}
+
+.incorrecto {
+	color: #e64439;
+}
+
+.nota {
+	font-size: 3vw;
+	margin:auto;
+	margin-top: 4%;
+	display:table;
+	padding: 16px 10px;
+	background-color: #90CAF9; 
+    border: 2px solid #ab2e3b;
+    color: #ab2e3b;
 }
