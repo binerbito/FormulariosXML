@@ -7,4 +7,8 @@ Proyecto de formulario con autocorrección mediante _html, css y JavaScript_.
 - [Compresión imágenes](http://compresspng.com/es/)
 - Edición de imágenes: GIMP
 - [Consultas técnicas en w3schools](https://www.w3schools.com/)
-- Para el JavaScript del proyecto, creado conjuntamente con mi compañero Lluis Cifre mediante la metodología _Pair Programming_.
+- **Para el JavaScript del proyecto, creado conjuntamente con mi compañero Lluis Cifre mediante la metodología _Pair Programming_.**
+
+## Ramas:
+- Master (código comentado).
+- Minified (con el código comprimido).
